@@ -19,6 +19,7 @@ class Block(pygame.Rect):
         self.type_block = type_block
     def blit(self):
         window.blit(self.image, (self.x, self.y))
+
 class Bullet(pygame.Rect):
     def __init__(self, x, y):
         super().__init__(x, y, 20, 20)
@@ -27,6 +28,7 @@ class Bullet(pygame.Rect):
         self.direction = None
         self.speed = 50
         self.count = 0
+
     def move(self):
         if self.count != 0:
             window.blit(self.image, (self.x, self.y))
@@ -41,9 +43,11 @@ class Bullet(pygame.Rect):
             self.count -= 1
             if self.count == 0:
                 self.stop()
+
     def stop(self):
         self.count = 0
         self.x = 100000
+
 class Panzar(pygame.Rect):
     def __init__(self, x, y):
         super().__init__(x * STEP, y * STEP, STEP, STEP)
@@ -51,16 +55,19 @@ class Panzar(pygame.Rect):
         self.pos = [x, y]
         self.bullet = Bullet(x, y)
         self.angle = 0
+
     def move(self):
         pass
     def blit(self):
         self.move()
         window.blit(self.image, (self.x, self.y))
+
     def rotate_to(self, angle):
         rotate = (360 - self.angle + angle)
         self.angle = angle
         self.image = pygame.transform.rotate(self.image, rotate)
     def strike(self):
+
         if self.bullet.count == 0:
             self.bullet.x = self.x + STEP / 2 - 10
             self.bullet.y = self.y + STEP / 2 - 10
@@ -72,6 +79,7 @@ class Player(Panzar):
         super().__init__(x, y)
         self.image =  pygame.image.load(os.path.join(PATH, 'images/panzer.png'))
         self.image =  pygame.transform.scale(self.image, (STEP, STEP))
+
     def move(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
@@ -96,6 +104,7 @@ class Player(Panzar):
             self.rotate_to(270)
         elif keys[pygame.K_z]:
             self.strike()
+
 class Player2(Panzar):
     def __init__(self, x, y):
         super().__init__(x, y)
