@@ -8,7 +8,7 @@ SCREEN_HEIGHT = 800
 STEP = 50
 
 window = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Tanks 2D')
+pygame.display.set_caption('Tanks by Yemelianov Oleh')
 
 
 class Block(pygame.Rect):
@@ -79,7 +79,6 @@ class Player(Panzar):
         super().__init__(x, y)
         self.image =  pygame.image.load(os.path.join(PATH, 'images/panzer.png'))
         self.image =  pygame.transform.scale(self.image, (STEP, STEP))
-
     def move(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:
